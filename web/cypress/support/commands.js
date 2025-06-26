@@ -29,7 +29,7 @@ Cypress.Commands.add('start', ()=> {
     cy.visit('http://localhost:3000')
 })
 
-Cypress.Commands.add('submitLogin', (email, senha)=> {
+Cypress.Commands.add('submitLoginForm', (email, senha)=> {
     cy.get('#email').type(email)
     cy.get('#password').type(senha)
     cy.contains('button', 'Entrar').click()
