@@ -5,8 +5,8 @@
 //   })
 // })
 
-describe('Login', ()=>{ // cenário de login
-  it('Should log in successfully', ()=> { // caso de teste 1
+describe('Login', () => { // cenário de login
+  it('Should log in successfully', () => { // caso de teste 1
     cy.start()
     cy.submitLoginForm('papito@webdojo.com', 'katana123')
 
@@ -19,7 +19,7 @@ describe('Login', ()=>{ // cenário de login
       .and('have.text', 'Olá QA, esse é o seu Dojo para aprender Automação de Testes.')
   })
 
-  it('Should not log in with wrong password', ()=> { // caso de teste 2
+  it('Should not log in with wrong password', () => { // caso de teste 2
     cy.start()
     cy.submitLoginForm('papito@webdojo.com', 'katana000')
 
@@ -27,7 +27,7 @@ describe('Login', ()=>{ // cenário de login
       .should('be.visible')
   })
 
-  it('Should not log in with wrong email', ()=> { // caso de teste 3
+  it('Should not log in with wrong email', () => { // caso de teste 3
     cy.start()
     cy.submitLoginForm('404@webdojo.com', 'katana123')
 
