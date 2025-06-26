@@ -8,7 +8,7 @@
 describe('Login', ()=>{ // cenário de login
   it('Should log in successfully', ()=> { // caso de teste 1
     cy.start()
-    cy.submitLogin('papito@webdojo.com', 'katana123')
+    cy.submitLoginForm('papito@webdojo.com', 'katana123')
 
     cy.get('[data-cy="user-name"]')
       .should('be.visible')
@@ -21,7 +21,7 @@ describe('Login', ()=>{ // cenário de login
 
   it('Should not log in with wrong password', ()=> { // caso de teste 2
     cy.start()
-    cy.submitLogin('papito@webdojo.com', 'katana000')
+    cy.submitLoginForm('papito@webdojo.com', 'katana000')
 
     cy.contains('Acesso negado! Tente novamente.')
       .should('be.visible')
@@ -29,7 +29,7 @@ describe('Login', ()=>{ // cenário de login
 
   it('Should not log in with wrong email', ()=> { // caso de teste 3
     cy.start()
-    cy.submitLogin('404@webdojo.com', 'katana123')
+    cy.submitLoginForm('404@webdojo.com', 'katana123')
 
     cy.contains('Acesso negado! Tente novamente.')
       .should('be.visible')
