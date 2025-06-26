@@ -34,3 +34,12 @@ Cypress.Commands.add('submitLoginForm', (email, senha)=> {
     cy.get('#password').type(senha)
     cy.contains('button', 'Entrar').click()
 })
+
+Cypress.Commands.add('goTo', (buttonName, pageTitle) => {
+    cy.contains('button', buttonName) // pre-condição
+        .should('be.visible') // pre-condição
+        .click()
+
+    cy.contains('h1', pageTitle) // pre-condição
+        .should('be.visible') // pre-condição
+})
