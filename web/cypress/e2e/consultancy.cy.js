@@ -8,7 +8,7 @@ describe('Consultancy Form', () => {
 
         cy.get('input[placeholder="Digite seu nome completo"]').type('Bruno Oliveira')
         cy.get('input[placeholder="Digite seu email"]').type('papito@webdojo.com')
-            // .should('have.value', 'papito@webdojo.com')
+        // .should('have.value', 'papito@webdojo.com')
         cy.contains('label', 'Telefone')
             .parent()
             .find('input').type('81988880000')
@@ -37,15 +37,48 @@ describe('Consultancy Form', () => {
             'Indicação de Amigo'
         ]
 
-        discoveryChannels.forEach( (channel)=> {
+        discoveryChannels.forEach((channel) => {
             cy.contains('label', channel)
                 .find('input')
                 .check()
                 .should('be.checked')
         })
-            
+
         cy.get('input[type="file"]')
-            .selectFile('./cypress/fixtures/document.pdf', {force: true})
+            .selectFile('./cypress/fixtures/document.pdf', { force: true })
+
+        cy.get('textarea[placeholder="Descreva mais detalhes sobre sua necessidade"]')
+            .type('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
+
+
+        const techs = [
+            'Cypress',
+            'Selenium',
+            'WebDriverIO',
+            'Playwright',
+            'Robot Framework'
+        ]
+
+        techs.forEach((tech) => {
+            cy.get('input[placeholder="Digite uma tecnologia e pressione Enter"]') // o get seleciona este elemento com o input que tem este placeholder em específico.
+                .type(tech)
+                .type('{enter}')
+
+            cy.contains('label', 'Tecnologias') // o contains busca o elemento que contenha um trecho de texto específico
+                .parent()
+                .contains('span', tech)
+                .should('be.visible')
+        })
+
+        cy.contains('label', 'Li e aceito os')
+            .find('input')
+            .check()
+        
+        cy.contains('button', 'Enviar formulário')
+            .click()
+        
+        cy.contains('div', 'Sua solicitação de consultoria foi enviada com sucesso! Em breve, nossa equipe entrará em contato através do email fornecido.')
+            .should('be.visible')
 
         // cy.get('input[placeholder="Digite seu nome completo"]').type('Fernando Papito') // selecionando um campo pelo placeholder, caso nao haja ID. selecionar a tag que representa o elemento.
         // // cy.get('#email').type('papito@webdojo.com') // selecionando um campo pelo ID
