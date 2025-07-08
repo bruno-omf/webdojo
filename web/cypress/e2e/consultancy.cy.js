@@ -1,6 +1,6 @@
 describe('Consultancy Form', () => {
 
-    it('Should request individual consultancy', () => {
+    it.only('Should request individual consultancy', () => {
         cy.start() // pre-condição
         cy.submitLoginForm('papito@webdojo.com', 'katana123') // pre-condição
 
@@ -77,8 +77,11 @@ describe('Consultancy Form', () => {
         cy.contains('button', 'Enviar formulário')
             .click()
         
-        cy.contains('div', 'Sua solicitação de consultoria foi enviada com sucesso! Em breve, nossa equipe entrará em contato através do email fornecido.')
+        cy.get('.modal')
             .should('be.visible')
+            .find('.modal-content')
+            .should('be.visible')
+            .and('have.text', 'Sua solicitação de consultoria foi enviada com sucesso! Em breve, nossa equipe entrará em contato através do email fornecido.')
 
         // cy.get('input[placeholder="Digite seu nome completo"]').type('Fernando Papito') // selecionando um campo pelo placeholder, caso nao haja ID. selecionar a tag que representa o elemento.
         // // cy.get('#email').type('papito@webdojo.com') // selecionando um campo pelo ID
@@ -112,7 +115,7 @@ describe('Consultancy Form', () => {
         //     .should('have.value', '609.368.610-88')
     })
 
-    it.only('Should validate required fields ', () => {
+    it('Should validate required fields ', () => {
         cy.start()
         cy.submitLoginForm('papito@webdojo.com', 'katana123')
 
