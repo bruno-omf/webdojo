@@ -111,4 +111,31 @@ describe('Consultancy Form', () => {
         //     .type('60936861088')
         //     .should('have.value', '609.368.610-88')
     })
+
+    it.only('Should validate required fields ', () => {
+        cy.start()
+        cy.submitLoginForm('papito@webdojo.com', 'katana123')
+
+        cy.goTo('Formulários', 'Consultoria')
+        
+        cy.contains('button', 'Enviar formulário')
+            .click()
+
+        cy.contains('label', 'Nome Completo')
+            .parent()
+            .contains('p', 'Campo obrigatório')
+            .should('be.visible')
+            .and('have.class', 'text-red-400')
+            .and('have.css', 'color', 'rgb(248, 113, 113)')
+
+        cy.contains('label', 'Email')
+            .parent()
+            .contains('p', 'Campo obrigatório')
+            .should('be.visible')
+            .and('have.class', 'text-red-400')
+            .and('have.css', 'color', 'rgb(248, 113, 113)')
+
+        cy.contains('p', 'Você precisa aceitar os termos de uso')
+            .should('be.visible')
+    })
 })
